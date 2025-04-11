@@ -1,1 +1,1 @@
-# monto-carlo-tree-search
+# noughts-and-crosses-solver

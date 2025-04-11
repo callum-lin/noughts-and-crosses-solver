@@ -1,8 +1,4 @@
 from math import inf
-import signal
-from sys import exit
-from string import ascii_uppercase
-from time import sleep
 
 
 def get_all_child_moves(board):
@@ -107,102 +103,23 @@ def negamax(board, starting=True):
     return max_score
 
 
-
-
 def is_move_valid(board, move):
     return board[move[0]][move[1]] == " "
 
 
-def clear_screen():
-    print("\x1Bc")
-
-
-def print_board(board):
-    print("     A   B   C")
-    print("    -----------")
+def return_list_of_won_squares(board):
+    if not game_ended(board):
+        return []
+    if is_draw(board):
+        return []
     for i, row in enumerate(board):
-        print(i + 1, " |", " | ".join(row), "|")
-    print("    -----------")
-
-
-def user_input_helper():
-    user_input = input("Enter a move or type EXIT to exit: ")
-    user_input = user_input.upper()
-    if user_input == "EXIT":
-        clear_screen()
-        disable_alternate_text_buffer()
-        exit()
-    move_column = ascii_uppercase.find(user_input[0])
-    move_row = int(user_input[1]) - 1
-    return (move_row, move_column)
-
-
-def get_user_input(board):
-    while True:
-        move = user_input_helper()
-        if is_move_valid(board, move):
-            return move
-        print("That was an invalid move")
-        sleep(2)
-        clear_screen()
-        print_board(board)
-
-
-def game_loop(board):
-    print_board(board)
-    print("The AI is thinking...")
-    while not game_ended(board):
-        best_move = negamax(board)
-        make_move(board, best_move)
-        clear_screen()
-        print_board(board)
-        if game_ended(board):
-            return
-        user_move = get_user_input(board)
-        make_move(board, user_move)
-        clear_screen()
-        print_board(board)
-        print("The AI is thinking...")
-
-
-def show_message(board):
-    if not game_ended:
-        print("The game is still ongoing.")
-        return
-    if have_crosses_won(board):
-        print("Crosses have won!")
-    elif have_noughts_won(board):
-        print("Noughts have won!")
-    else:
-        print("The game ended in a draw.")
-
-
-def enable_alternate_text_buffer():
-    print("\x1B[?1049h")
-
-
-def disable_alternate_text_buffer():
-    print("\x1B[?1049l")
-
-
-def main():
-    board = [[" ", " ", " "] for i in range(3)]
-    enable_alternate_text_buffer()
-    game_loop(board)
-    show_message(board)
-    sleep(4)
-    clear_screen()
-    disable_alternate_text_buffer()
-
-
-def signal_handler(sig, frame):
-    print("Program shutting down.")
-    print("Restoring original environment...")
-    clear_screen()
-    disable_alternate_text_buffer()
-    exit()
-
-
-if __name__ == "__main__":
-    signal.signal(signal.SIGINT, signal_handler)
-    main()
+        if row[0] == row[1] == row[2]:
+            return [(i, 0), (i, 1), (i, 2)]
+    for i in range(len(board)):
+        if board[0][i] == board[1][i] == board[2][i]:
+            return [(0, i), (1, i), (2, i)]
+    if board[0][0] == board[1][1] == board[2][2]:
+        return [(0, 0), (1, 1), (2, 2)]
+    if board[0][2] == board[1][1] == board[2][0]:
+        return [(0, 2), (1, 1), (2, 0)]
+    return False
