@@ -10,9 +10,9 @@ from noughts_and_crosses import (
     negamax,
     is_move_valid,
     return_list_of_won_squares,
+    generate_random_move,
 )
 import pygame
-from random import randint
 
 WIDTH = 720
 HEIGHT = 720
@@ -84,7 +84,8 @@ if __name__ == "__main__":
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     clock = pygame.time.Clock()
     board = [[" ", " ", " "] for i in range(3)]
-    board[randint(0, 2)][randint(0, 2)] = "X"
+    move = generate_random_move(board)
+    make_move(board, move)
     while True:
         game_loop(screen, clock, board)
     pygame.quit()

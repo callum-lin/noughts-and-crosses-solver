@@ -8,14 +8,14 @@ from noughts_and_crosses import (
     have_noughts_won,
     game_ended,
     negamax,
-    is_move_valid
+    is_move_valid,
+    generate_random_move,
 )
 
 import signal
 from sys import exit
 from string import ascii_uppercase
 from time import sleep
-from random import randint
 
 
 def clear_screen():
@@ -60,7 +60,7 @@ def game_loop(board):
         make_move(board, user_move)
 
         clear_screen()
-        print_board(board)   
+        print_board(board)
         print("The AI is thinking...")
         best_move = negamax(board)
         make_move(board, best_move)
@@ -92,7 +92,8 @@ def disable_alternate_text_buffer():
 
 def main():
     board = [[" ", " ", " "] for i in range(3)]
-    board[randint(0,2)][randint(0,2)] = "X"
+    move = generate_random_move(board)
+    make_move(board, move)
     enable_alternate_text_buffer()
     game_loop(board)
     show_message(board)

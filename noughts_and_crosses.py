@@ -1,4 +1,5 @@
 from math import inf
+from random import randint, choice
 
 
 def get_all_child_moves(board):
@@ -123,3 +124,13 @@ def return_list_of_won_squares(board):
     if board[0][2] == board[1][1] == board[2][0]:
         return [(0, 2), (1, 1), (2, 0)]
     return False
+
+
+def generate_random_move(board):
+    possible_moves = []
+    for i in range(3):
+        for j in range(3):
+            move = (i, j)
+            if is_move_valid(board, move):
+                possible_moves.append(move)
+    return choice(possible_moves)
