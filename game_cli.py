@@ -8,9 +8,8 @@ from noughts_and_crosses import (
     have_noughts_won,
     game_ended,
     negamax,
-    is_move_valid,
-    generate_random_move,
 )
+from util import (generate_random_move, is_move_valid)
 
 import signal
 from sys import exit

@@ -8,10 +8,9 @@ from noughts_and_crosses import (
     have_noughts_won,
     game_ended,
     negamax,
-    is_move_valid,
-    return_list_of_won_squares,
-    generate_random_move,
 )
+from util import is_move_valid, return_list_of_won_squares, generate_random_move
+
 import pygame
 
 WIDTH = 720
