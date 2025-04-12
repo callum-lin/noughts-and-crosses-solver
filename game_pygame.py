@@ -81,6 +81,7 @@ def game_loop(screen, clock, board):
 
 if __name__ == "__main__":
     pygame.init()
+    pygame.display.set_caption("Noughts and Crosses")
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     clock = pygame.time.Clock()
     board = [[" ", " ", " "] for i in range(3)]
