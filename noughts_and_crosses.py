@@ -87,9 +87,7 @@ def get_all_child_moves(board):
 
 def negamax(board, starting=True):
     if game_ended(board):
-        raise TypeError(
-            "You cannot call this function when the game has already been concluded."
-        )
+        return evaluate(board)
     max_score = -inf
     best_move = None
     for move in get_all_child_moves(board):

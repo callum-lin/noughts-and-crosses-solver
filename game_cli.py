@@ -20,6 +20,14 @@ def clear_screen():
     print("\x1Bc")
 
 
+def enable_alternate_text_buffer():
+    print("\x1B[?1049h")
+
+
+def disable_alternate_text_buffer():
+    print("\x1B[?1049l")
+
+
 def print_board(board):
     print("     A   B   C")
     print("    -----------")
@@ -49,14 +57,6 @@ def get_user_input(board):
         sleep(1)
         clear_screen()
         print_board(board)
-
-
-def enable_alternate_text_buffer():
-    print("\x1B[?1049h")
-
-
-def disable_alternate_text_buffer():
-    print("\x1B[?1049l")
 
 
 def game_loop(board):
