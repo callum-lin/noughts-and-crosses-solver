@@ -9,10 +9,9 @@ from noughts_and_crosses import (
     game_ended,
     negamax,
 )
-from util import (generate_random_move, is_move_valid)
+from util import generate_random_move, is_move_valid
 
 import signal
-from sys import exit
 from string import ascii_uppercase
 from time import sleep
 
@@ -52,6 +51,14 @@ def get_user_input(board):
         print_board(board)
 
 
+def enable_alternate_text_buffer():
+    print("\x1B[?1049h")
+
+
+def disable_alternate_text_buffer():
+    print("\x1B[?1049l")
+
+
 def game_loop(board):
     print_board(board)
     while not game_ended(board):
@@ -79,14 +86,6 @@ def show_message(board):
         print("Noughts have won!")
     else:
         print("The game ended in a draw.")
-
-
-def enable_alternate_text_buffer():
-    print("\x1B[?1049h")
-
-
-def disable_alternate_text_buffer():
-    print("\x1B[?1049l")
 
 
 def main():

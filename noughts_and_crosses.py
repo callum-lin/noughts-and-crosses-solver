@@ -1,5 +1,6 @@
 from math import inf
 
+
 def get_all_child_moves(board):
     for row in range(3):
         for column in range(3):
@@ -87,7 +88,6 @@ def unmake_move(board, move):
 def negamax(board, starting=True):
     if game_ended(board):
         return evaluate(board)
-    side_to_move = "X" if crosses_to_move(board) else "O"
     max_score = -inf
     best_move = None
     for move in get_all_child_moves(board):
