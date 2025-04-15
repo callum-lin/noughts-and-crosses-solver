@@ -64,16 +64,15 @@ def game_loop(board):
     while not game_ended(board):
         user_move = get_user_input(board)
         make_move(board, user_move)
-
         clear_screen()
         print_board(board)
+        if game_ended(board):
+            return
         print("The AI is thinking...")
         best_move = negamax(board)
         make_move(board, best_move)
         clear_screen()
         print_board(board)
-        if game_ended(board):
-            return
 
 
 def show_message(board):
