@@ -1,6 +1,7 @@
 from random import randint, choice
 from noughts_and_crosses import is_draw, game_ended
 
+
 def is_move_valid(board, move):
     return board[move[0]][move[1]] == " "
 
