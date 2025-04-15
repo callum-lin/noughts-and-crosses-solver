@@ -1,13 +1,6 @@
 from math import inf
 
 
-def get_all_child_moves(board):
-    for row in range(3):
-        for column in range(3):
-            if board[row][column] == " ":
-                yield row, column
-
-
 def crosses_to_move(board):
     noughts = 0
     crosses = 0
@@ -83,6 +76,13 @@ def make_move(board, move):
 def unmake_move(board, move):
     move_row, move_column = move
     board[move_row][move_column] = " "
+
+
+def get_all_child_moves(board):
+    for row in range(3):
+        for column in range(3):
+            if board[row][column] == " ":
+                yield row, column
 
 
 def negamax(board, starting=True):
